@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Information & Location</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Marwadi University Information Webpage</h2>
+
+    <!-- 1. HTML5 Geolocation Section -->
+    <div class="section">
+        <h3>1. HTML5 Geolocation</h3>
+        <p>Click the button below to get your current location coordinates:</p>
+        <button onclick="getLocation()">Get Location</button>
+        <p id="locationResult" style="margin-top: 10px; font-weight: bold; color: #333;"></p>
+    </div>
+
+    <!-- 2. Iframe Section (Map) -->
+    <div class="section">
+        <h3>2. College Map using an Iframe</h3>
+        <p>Embedded map showing the college location:</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.3!2d70.8560!3d22.2890!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE3JzIwLjQiTiA3MMKwNTEnMjEuNiJF!5e0!3m2!1sen!2sin!4f1!4v1600000000000" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- 3. Explanation of Iframe Purpose -->
+    <div class="section">
+        <h3>3. Purpose of Using an Iframe</h3>
+        <p><strong>What is the purpose of an iframe?</strong></p>
+        <p>An iframe (Inline Frame) is used to embed another external webpage, document, or map (like Google Maps) directly into the current HTML webpage without reloading the whole page.</p>
+    </div>
+
+    <!-- JavaScript for HTML5 Geolocation -->
+    <script>
+        const result = document.getElementById("locationResult");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                result.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            result.innerHTML = "Latitude: " + position.coords.latitude.toFixed(4) + 
+                               "<br>Longitude: " + position.coords.longitude.toFixed(4);
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    result.innerHTML = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    result.innerHTML = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    result.innerHTML = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    result.innerHTML = "An unknown error occurred.";
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
